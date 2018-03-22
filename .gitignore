@@ -1,4 +1,5 @@
-data/
-felsenbein_2311/
-accuracy_matrices.ipynb
-create_colored_oct_slices.ipynb
+/data/
+/felsenbein_2311/
+/accuracy_matrices.ipynb
+/create_colored_oct_slices.ipynb
+/.idea/
