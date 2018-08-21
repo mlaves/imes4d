@@ -309,6 +309,13 @@ def blend_collection(volumes, transformations):
     shift[:3, 3] = np.array([x_start, y_start, z_start])
     cum_t = map(lambda x: np.matmul(shift, x), cum_t)
 
+    # calculate final bounds for every volume
+    # this is just for visualisation of overlapping bounds
+    for t in cum_t:
+        n_bounds, n_shape = _calc_new_bounds(volumes[0].shape, t, total=False)
+        print(n_bounds)
+        print(' ')
+
     # generate empty volume for stitched data
     stitched_vol = np.zeros(new_shape)
 
@@ -334,7 +341,7 @@ def blend_collection(volumes, transformations):
     return stitched_vol
 
 
-def _calc_new_bounds(shape, trans):
+def _calc_new_bounds(shape, trans, total=True):
     # find max boundaries for new volume
     new_bounds = np.zeros((8, 3), dtype=np.float32)
     new_bounds[0] = np.array([0, 0, 0], dtype=np.float32)
@@ -348,37 +355,38 @@ def _calc_new_bounds(shape, trans):
     new_bounds = np.concatenate((new_bounds, np.ones((8, 1))), axis=1)
     new_bounds = np.matmul(trans, new_bounds.T).T
 
-    new_bounds[0, 0] = np.min([0, np.floor(new_bounds[0, 0])])
-    new_bounds[0, 1] = np.min([0, np.floor(new_bounds[0, 1])])
-    new_bounds[0, 2] = np.min([0, np.floor(new_bounds[0, 2])])
+    if total:
+        new_bounds[0, 0] = np.min([0, np.floor(new_bounds[0, 0])])
+        new_bounds[0, 1] = np.min([0, np.floor(new_bounds[0, 1])])
+        new_bounds[0, 2] = np.min([0, np.floor(new_bounds[0, 2])])
 
-    new_bounds[1, 0] = np.min([0, np.floor(new_bounds[1, 0])])
-    new_bounds[1, 1] = np.min([0, np.floor(new_bounds[1, 1])])
-    new_bounds[1, 2] = np.max([shape[2], np.ceil(new_bounds[1, 2])])
+        new_bounds[1, 0] = np.min([0, np.floor(new_bounds[1, 0])])
+        new_bounds[1, 1] = np.min([0, np.floor(new_bounds[1, 1])])
+        new_bounds[1, 2] = np.max([shape[2], np.ceil(new_bounds[1, 2])])
 
-    new_bounds[2, 0] = np.min([0, np.floor(new_bounds[2, 0])])
-    new_bounds[2, 1] = np.max([shape[1], np.ceil(new_bounds[2, 1])])
-    new_bounds[2, 2] = np.min([0, np.floor(new_bounds[2, 2])])
+        new_bounds[2, 0] = np.min([0, np.floor(new_bounds[2, 0])])
+        new_bounds[2, 1] = np.max([shape[1], np.ceil(new_bounds[2, 1])])
+        new_bounds[2, 2] = np.min([0, np.floor(new_bounds[2, 2])])
 
-    new_bounds[3, 0] = np.min([0, np.floor(new_bounds[2, 0])])
-    new_bounds[3, 1] = np.max([shape[1], np.ceil(new_bounds[2, 1])])
-    new_bounds[3, 2] = np.max([shape[2], np.ceil(new_bounds[2, 2])])
+        new_bounds[3, 0] = np.min([0, np.floor(new_bounds[2, 0])])
+        new_bounds[3, 1] = np.max([shape[1], np.ceil(new_bounds[2, 1])])
+        new_bounds[3, 2] = np.max([shape[2], np.ceil(new_bounds[2, 2])])
 
-    new_bounds[4, 0] = np.max([shape[0], np.ceil(new_bounds[4, 0])])
-    new_bounds[4, 1] = np.min([0, np.floor(new_bounds[4, 1])])
-    new_bounds[4, 2] = np.min([0, np.floor(new_bounds[4, 2])])
+        new_bounds[4, 0] = np.max([shape[0], np.ceil(new_bounds[4, 0])])
+        new_bounds[4, 1] = np.min([0, np.floor(new_bounds[4, 1])])
+        new_bounds[4, 2] = np.min([0, np.floor(new_bounds[4, 2])])
 
-    new_bounds[5, 0] = np.max([shape[0], np.ceil(new_bounds[5, 0])])
-    new_bounds[5, 1] = np.min([0, np.floor(new_bounds[5, 1])])
-    new_bounds[5, 2] = np.max([shape[2], np.ceil(new_bounds[5, 2])])
+        new_bounds[5, 0] = np.max([shape[0], np.ceil(new_bounds[5, 0])])
+        new_bounds[5, 1] = np.min([0, np.floor(new_bounds[5, 1])])
+        new_bounds[5, 2] = np.max([shape[2], np.ceil(new_bounds[5, 2])])
 
-    new_bounds[6, 0] = np.max([shape[0], np.ceil(new_bounds[6, 0])])
-    new_bounds[6, 1] = np.max([shape[1], np.ceil(new_bounds[6, 1])])
-    new_bounds[6, 2] = np.min([0, np.floor(new_bounds[6, 2])])
+        new_bounds[6, 0] = np.max([shape[0], np.ceil(new_bounds[6, 0])])
+        new_bounds[6, 1] = np.max([shape[1], np.ceil(new_bounds[6, 1])])
+        new_bounds[6, 2] = np.min([0, np.floor(new_bounds[6, 2])])
 
-    new_bounds[7, 0] = np.max([shape[0], np.ceil(new_bounds[7, 0])])
-    new_bounds[7, 1] = np.max([shape[1], np.ceil(new_bounds[7, 1])])
-    new_bounds[7, 2] = np.max([shape[2], np.ceil(new_bounds[7, 2])])
+        new_bounds[7, 0] = np.max([shape[0], np.ceil(new_bounds[7, 0])])
+        new_bounds[7, 1] = np.max([shape[1], np.ceil(new_bounds[7, 1])])
+        new_bounds[7, 2] = np.max([shape[2], np.ceil(new_bounds[7, 2])])
 
     new_shape = (np.max(new_bounds[:, 0]) - np.min(new_bounds[:, 0]),
                  np.max(new_bounds[:, 1]) - np.min(new_bounds[:, 1]),

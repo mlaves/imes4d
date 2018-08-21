@@ -3,22 +3,18 @@ from tqdm import tqdm
 
 
 if __name__ == "__main__":
-    with tqdm(total=4) as pbar:
-        slices_to_npz('/home/laves/Pictures/oct/Felsenbein/0/*.JPG', '0.npz')
+    with tqdm(total=7) as pbar:
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/0/*.JPG', 'sb_0.npz')
         pbar.update()
-        slices_to_npz('/home/laves/Pictures/oct/Felsenbein/1/*.JPG', '1.npz')
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/1/*.JPG', 'sb_1.npz')
         pbar.update()
-        slices_to_npz('/home/laves/Pictures/oct/Felsenbein/2/*.JPG', '2.npz')
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/2/*.JPG', 'sb_2.npz')
         pbar.update()
-        slices_to_npz('/home/laves/Pictures/oct/Felsenbein/3/*.JPG', '3.npz')
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/3/*.JPG', 'sb_3.npz')
         pbar.update()
-        # slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/4/*.JPG', '4.npz')
-        # pbar.update()
-        # slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/5/*.JPG', '5.npz')
-        # pbar.update()
-        # slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/6/*.JPG', '6.npz')
-        # pbar.update()
-        # slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/7/*.JPG', '7.npz')
-        # pbar.update()
-        # slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/8/*.JPG', '8.npz')
-        # pbar.update()
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/4/*.JPG', 'sb_4.npz')
+        pbar.update()
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/5/*.JPG', 'sb_5.npz')
+        pbar.update()
+        slices_to_npz('/home/laves/Pictures/oct/Kugelplatte/6/*.JPG', 'sb_6.npz')
+        pbar.update()

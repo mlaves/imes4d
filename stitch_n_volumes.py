@@ -7,18 +7,19 @@ from imes4d.utils import Timer, ransac, blend_collection
 
 if __name__ == "__main__":
 
-    N = 4
+    N = 7
     scale = 2
     transformations = []
+    data_prefix = 'data/sb_'
 
-    a = np.load('0.npz')
+    a = np.load(data_prefix + '0.npz')
     a = a[a.files[0]][::scale, ::scale, ::scale].astype(np.float32)
 
     # first, calculate flow and transformation matrices
     for n in range(1, N):
         # load two adjacent volumes
         with Timer('loading ' + str(n)):
-            b = np.load(str(n) + '.npz')
+            b = np.load(data_prefix + str(n) + '.npz')
             b = b[b.files[0]][::scale, ::scale, ::scale].astype(np.float32)
 
         with Timer('harris ' + str(n)):
@@ -54,7 +55,7 @@ if __name__ == "__main__":
     with Timer('blending'):
         volumes = []
         for n in range(N):
-            vol = np.load(str(n)+'.npz')
+            vol = np.load(data_prefix + str(n)+'.npz')
             vol = vol[vol.files[0]][::scale, ::scale, ::scale].astype(np.float32)
             volumes.append(vol)
 
