@@ -2,6 +2,9 @@
 
 Max-Heinrich Laves, Lüder A. Kahrs, Tobias Ortmaier
 
+If you use this code, please cite:  
+Laves, MH., Kahrs, LA., Ortmaier, T. Volumetric 3D stitching of optical coherence tomography volumes. Current Directions in Biomedical Engineering, 4(1), pp. 327-330. Retrieved 5 Dec. 2018, from doi:10.1515/cdbme-2018-0079
+
 ## Abstract
 
 Optical coherence tomography (OCT) is a non-invasive medical imaging modality, which provides high-resolution transectional images of biological tissue. However, its potential is limited due to a relatively small field of view. To overcome this drawback, we describe a scheme for fully automated stitching of multiple 3D-OCT volumes for panoramic imaging.

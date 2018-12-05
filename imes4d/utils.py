@@ -23,7 +23,7 @@ def slices_to_npz(glob_pattern: str, out_file: str, compressed: bool=True):
     from skimage.io import ImageCollection, imread
 
     images_coll = ImageCollection(glob_pattern.replace('"', '').replace("'", ''),
-                                  load_func=lambda x: imread(x, as_grey=True))
+                                  load_func=lambda x: imread(x, as_gray=True))
 
     if compressed:
         np.savez_compressed(out_file.replace('"', '').replace("'", ''), images_coll)
