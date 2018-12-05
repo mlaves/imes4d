@@ -2,8 +2,9 @@
 
 Max-Heinrich Laves, Lüder A. Kahrs, Tobias Ortmaier
 
-If you use this code, please cite:  
-Laves, MH., Kahrs, LA., Ortmaier, T. Volumetric 3D stitching of optical coherence tomography volumes. Current Directions in Biomedical Engineering, 4(1), pp. 327-330. Retrieved 5 Dec. 2018, from doi:10.1515/cdbme-2018-0079
+If you use this code, please cite:
+ 
+Laves, MH., Kahrs, LA., Ortmaier, T. Volumetric 3D stitching of optical coherence tomography volumes. Current Directions in Biomedical Engineering, 4(1), pp. 327-330. Retrieved 5 Dec. 2018, doi:[10.1515/cdbme-2018-0079](https://doi.org/10.1515/cdbme-2018-0079)
 
 ## Abstract
 
